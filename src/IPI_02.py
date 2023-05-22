@@ -28,15 +28,21 @@ def equalize(image):
 image = cv2.imread(r'../input/car.png',0)
 equalized_image = equalize(image)
 
-cv2.imshow('teste',equalized_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.imshow('teste',equalized_image)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
-# # Exibir a imagem original e a imagem equalizada
-# plt.subplot(1, 2, 1)
-# plt.imshow(image, cmap='gray')
-# plt.title('Imagem original')
-# plt.subplot(1, 2, 2)
-# plt.imshow(equalized_image, cmap='gray')
-# plt.title('Imagem equalizada')
+# # Plotar o histograma or CDF
+# plt.plot(histogram)
+# plt.xlabel('Intensidade')
+# plt.ylabel('Frequência')
 # plt.show()
+
+# Exibir a imagem original e a imagem equalizada
+plt.subplot(1, 2, 1)
+plt.imshow(image, cmap='gray')
+plt.title('Imagem original')
+plt.subplot(1, 2, 2)
+plt.imshow(equalized_image, cmap='gray')
+plt.title('Imagem equalizada')
+plt.show()
