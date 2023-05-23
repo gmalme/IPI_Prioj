@@ -24,9 +24,15 @@ def equalize(image):
     equalized_image = np.interp(image.flatten(), bins[:-1], cdf_normalized * 255).reshape(image.shape).astype(np.uint8)
     return equalized_image
 
-#__________main__________
+def gamma(image,gamma):
+    gamma_table = np.array([((i/255.0) ** (1/gamma)) * 255 for i in np.arange(0, 256)]).astype("uint8")
+    corrected_image = cv2.LUT(image, gamma_table)
+    return corrected_image
+
+# __________main__________
 image = cv2.imread(r'../input/car.png',0)
-equalized_image = equalize(image)
+# equalized_image = equalize(image)
+corrected_image = gamma(image, 0.6)
 
 # cv2.imshow('teste',equalized_image)
 # cv2.waitKey(0)
@@ -38,11 +44,18 @@ equalized_image = equalize(image)
 # plt.ylabel('Frequência')
 # plt.show()
 
-# Exibir a imagem original e a imagem equalizada
-plt.subplot(1, 2, 1)
-plt.imshow(image, cmap='gray')
-plt.title('Imagem original')
-plt.subplot(1, 2, 2)
-plt.imshow(equalized_image, cmap='gray')
-plt.title('Imagem equalizada')
-plt.show()
+# # Exibir a imagem original e a imagem equalizada
+# plt.subplot(1, 2, 1)
+# plt.imshow(image, cmap='gray')
+# plt.title('Imagem original')
+# plt.subplot(1, 2, 2)
+# plt.imshow(equalized_image, cmap='gray')
+# plt.title('Imagem equalizada')
+# plt.show()
+
+# __________gama__________
+# Mostra a imagem original e a imagem corrigida
+cv2.imshow('Imagem Original', image)
+cv2.imshow('Imagem Corrigida', corrected_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
