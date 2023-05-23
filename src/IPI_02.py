@@ -29,14 +29,47 @@ def gamma(image,gamma):
     corrected_image = cv2.LUT(image, gamma_table)
     return corrected_image
 
+def printIm(tag, image):
+    # Plotar imagem equalizada com imshow ( equalização )
+    cv2.imshow(tag, image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+def print2Im(old_image, new_image, arg_a ='Imagem Original', arg_b ='Imagem Corrigida'):
+    # Mostra a imagem original e a imagem corrigida ( gama )
+    cv2.imshow(arg_a, old_image)
+    cv2.imshow(arg_b, new_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+def printPl(image, arg_a ='Intensidade', arg_b ='Frequência'):
+    # Plotar  imagem com plt ( histograma || CDF )
+    plt.plot(image)
+    plt.xlabel(arg_a)
+    plt.ylabel(arg_b)
+    plt.show()
+
+def print2Pl(old_image, new_image, arg_a ='Imagem original', arg_b ='Imagem equalizada'):
+    # Exibir a imagem original e a imagem equalizada ( equalização )
+    plt.subplot(1, 2, 1)
+    plt.imshow(old_image, cmap='gray')
+    plt.title(arg_a)
+    plt.subplot(1, 2, 2)
+    plt.imshow(new_image, cmap='gray')
+    plt.title(arg_a)
+    plt.show()
+
 # __________main__________
 image = cv2.imread(r'../input/car.png',0)
 # equalized_image = equalize(image)
 corrected_image = gamma(image, 0.6)
 
-# cv2.imshow('teste',equalized_image)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+# printa imagem equalizada
+# printIm('imagem equalizada', equalized_image) 
+# print2Pl(image, equalized_image)
+
+# print gama
+print2Im(image, corrected_image)
 
 # # Plotar o histograma or CDF
 # plt.plot(histogram)
@@ -44,18 +77,3 @@ corrected_image = gamma(image, 0.6)
 # plt.ylabel('Frequência')
 # plt.show()
 
-# # Exibir a imagem original e a imagem equalizada
-# plt.subplot(1, 2, 1)
-# plt.imshow(image, cmap='gray')
-# plt.title('Imagem original')
-# plt.subplot(1, 2, 2)
-# plt.imshow(equalized_image, cmap='gray')
-# plt.title('Imagem equalizada')
-# plt.show()
-
-# __________gama__________
-# Mostra a imagem original e a imagem corrigida
-cv2.imshow('Imagem Original', image)
-cv2.imshow('Imagem Corrigida', corrected_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
