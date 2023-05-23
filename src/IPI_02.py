@@ -54,7 +54,7 @@ def print2Pl(old_image, new_image, arg_a ='Imagem original', arg_b ='Imagem equa
 # __________main__________
 image = cv2.imread(r'../input/car.png',0)
 equalized_image, histogram, cdf = equalize(image)
-corrected_image = gamma(image, 0.6)
+corrected_image = gamma(image, 0.4)
 
 # printa imagem equalizada
 # printIm('imagem equalizada', equalized_image) 
@@ -64,7 +64,7 @@ corrected_image = gamma(image, 0.6)
 # printPl(cdf)
 
 # print gama
-# print2Im(image, corrected_image)
+print2Im(image, corrected_image)
 
 
 
