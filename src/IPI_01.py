@@ -14,7 +14,7 @@ def fill(image):
 
 def tam2(image):
     fill_image = fill(image)
-    
+
     return  fill_image
 
 
@@ -26,10 +26,16 @@ image = np.ones((2, 2, 3), dtype=np.uint8)
 #print(image,"____________AQUI____________\n")
 image = tam2(image)
 
-for x in image[:,:,]:
-    for y in x[:,]:
-        print(y,end='')
+# for x in image[:,:,]:
+#     for y in x[:,]:
+#         print(y,end='')
+#     print('\n')
+
+for x in range(image.shape[2]):
+    for y in range(image.shape[1]):
+        print(image[:,y,x],end='')
     print('\n')
+
     
 
 # print(image.shape)
