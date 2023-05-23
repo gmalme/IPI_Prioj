@@ -12,33 +12,56 @@ def fill(image):
     except Exception as erro:
         print("Ocorreu um erro:", erro)
 
+def verifica_row(matriz):
+    result = []
+    for row in range(len(matriz)):
+        if(all(elemento == 0 for elemento in matriz[row])):
+            result.append(row)
+
+    return result
+
+def verifica_coll(matriz):
+    result = []
+    for row in range(len(matriz)):
+        if( np.all(matriz[:, row] == 0) ):
+            result.append(row)
+
+    return result
+
+def odd_fill(matriz, white_lines):
+    for row in white_lines:
+        linha = np.copy(matriz[row-1])
+        matriz[row] = linha
+                    
+    return matriz
+
+def pair_fill(matriz, white_coll):
+    for row in range(len(matriz)):
+        for item in white_coll:
+            matriz[row][item] = matriz[row][item-1]
+ 
+    return matriz
+
 def tam2(image):
     fill_image = fill(image)
 
-    return  fill_image
+    for x in range(fill_image.shape[2]):
+        white_lines = verifica_row(fill_image[:,:,x])
+        fill_image[:,:,x] = odd_fill(fill_image[:,:,x], white_lines)
+        white_coll = verifica_coll(fill_image[:,:,x])
+        fill_image[:,:,x] = pair_fill(fill_image[:,:,x], white_coll)
+
+    return fill_image
 
 
 #______________________MAIN______________________
 image = cv2.imread(r'../input/fruit1.jpg')
-image = np.ones((2, 2, 3), dtype=np.uint8)
-#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+#image = np.ones((4, 4, 3), dtype=np.uint8)
 
 #print(image,"____________AQUI____________\n")
 image = tam2(image)
+cv2.imwrite('../output/fruit1.jpg',image)
 
-# for x in image[:,:,]:
-#     for y in x[:,]:
-#         print(y,end='')
-#     print('\n')
 
-for x in range(image.shape[2]):
-    for y in range(image.shape[1]):
-        print(image[:,y,x],end='')
-    print('\n')
-
-    
-
-# print(image.shape)
-# cv2.imshow("original", image)
-# cv2.waitKey(0)
-# cv2.imwrite("../output/fruit1.jpg", image)
+for size in range(image.shape[2]):
+    print(image[:,:,size],'\n')
