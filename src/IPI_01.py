@@ -87,30 +87,58 @@ def tamm(image):
 
     return fill_image
 
-def print2Pl(old_image, new_image, arg_a ='Imagem original', arg_b ='Imagem equalizada'):
-    # Exibir a imagem original e a imagem equalizada ( equalização )
-    plt.subplot(1, 2, 1)
-    plt.imshow(old_image, cmap='gray')
-    plt.title(arg_a)
-    plt.subplot(1, 2, 2)
-    plt.imshow(new_image, cmap='gray')
-    plt.title(arg_a)
-    plt.show()
+def fill_matriz(matriz, image_b):
+    for z in range(image_b.shape[2]):
+        for x in range(image_b.shape[1]):
+            for y in range(image_b.shape[0]):
+                matriz[((x+1)*2)-1, ((y+1)*2)-1, z] = image_b[x,y,z]
+    
+    return matriz
+
+def med_matriz(matriz):
+    for z in range(matriz.shape[2]):
+        for x in range(matriz.shape[1]):
+            for y in range(matriz.shape[0]):
+                if( matriz[x,y,z] == 0 ):
+                    result = 0
+                    idx = 0
+
+                    for cell in range(-1,1,2):
+                        if( x+cell >= 0 and x+cell < matriz.shape[1]):
+                            result += matriz[x+cell,y,z]
+                            idx+=1
+                        if( y+cell >= 0 and  y+cell < matriz.shape[0]):
+                            result += matriz[x,y+cell,z]
+                            idx+=1
+
+                    matriz[x,y,z] = result/idx
+
+    return matriz
+    
+
+def merge_image(image_a, image_b):
+    fill_image = fill(image_a)
+    fill_matriz(fill_image, image_b)
+    med_matriz(fill_image)
+
+    return fill_image
 
 #______________________MAIN______________________
 image = cv2.imread(r'../input/fruit1.jpg')
+image_b = cv2.imread(r'../input/fruit2.jpg')
 
-image_row = np.array(([3, 2, 3],[5,3,3]))
-image = np.stack([image_row] * 2)
-print(image)
-input()
+image = np.ones((2, 2, 3), dtype=np.uint8)
+image_b = np.ones((2, 2, 3), dtype=np.uint8)
+# image = np.stack([image_row] * 2)
 
-image = tamm(image)
+#image = tamm(image)
 #image = tam2(image)
-cv2.imwrite('../output/fruit1.jpg',image)
+#cv2.imwrite('../output/fruit3.jpg',image)
 #cv2.imwrite('../output/fruit2.jpg',image2)
 
-#print2Pl(image,image2)
+image = merge_image(image,image_b)
+
+#print(image_b.shape)
 
 for size in range(image.shape[2]):
     print(image[:,:,size],'\n')
