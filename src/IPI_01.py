@@ -137,7 +137,7 @@ image_b = cv2.imread(r'../input/fruit2.jpg')
 #cv2.imwrite('../output/fruit2.jpg',image2)
 
 image = merge_image(image,image_b)
-cv2.imwrite('../output/fruit3.jpg',image)
+cv2.imwrite('../output/fruit4.jpg',image)
 
 #print(image_b.shape)
 
