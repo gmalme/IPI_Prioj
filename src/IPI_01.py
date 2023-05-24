@@ -127,8 +127,8 @@ def merge_image(image_a, image_b):
 image = cv2.imread(r'../input/fruit1.jpg')
 image_b = cv2.imread(r'../input/fruit2.jpg')
 
-image = np.ones((2, 2, 3), dtype=np.uint8)
-image_b = np.ones((2, 2, 3), dtype=np.uint8)
+# image = np.ones((2, 2, 3), dtype=np.uint8)
+# image_b = np.ones((2, 2, 3), dtype=np.uint8)
 # image = np.stack([image_row] * 2)
 
 #image = tamm(image)
@@ -137,6 +137,7 @@ image_b = np.ones((2, 2, 3), dtype=np.uint8)
 #cv2.imwrite('../output/fruit2.jpg',image2)
 
 image = merge_image(image,image_b)
+cv2.imwrite('../output/fruit3.jpg',image)
 
 #print(image_b.shape)
 
