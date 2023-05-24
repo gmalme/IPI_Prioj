@@ -69,14 +69,17 @@ class imageResize:
     
         return matriz
 
-    def tam2(self, image):
-        fill_image = self.fill(image)
+    def tam2(self, image, tam):
+        fill_image =  image
+        
+        for _ in range(tam//2):
+            fill_image = self.fill(fill_image)
 
-        for x in range(fill_image.shape[2]):
-            white_lines = self.verifica_row(fill_image[:,:,x])
-            fill_image[:,:,x] = self.odd_fill(fill_image[:,:,x], white_lines)
-            white_coll = self.verifica_coll(fill_image[:,:,x])
-            fill_image[:,:,x] = self.pair_fill(fill_image[:,:,x], white_coll)
+            for x in range(fill_image.shape[2]):
+                white_lines = self.verifica_row(fill_image[:,:,x])
+                fill_image[:,:,x] = self.odd_fill(fill_image[:,:,x], white_lines)
+                white_coll = self.verifica_coll(fill_image[:,:,x])
+                fill_image[:,:,x] = self.pair_fill(fill_image[:,:,x], white_coll)
 
         return fill_image
 

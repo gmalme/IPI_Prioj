@@ -11,7 +11,7 @@ images_01.append(cv2.imread(r'input/fruit1.jpg'))
 images_01.append(cv2.imread(r'input/fruit2.jpg'))
 
 # Questão 1.1:
-image_result = image_resize.tam2(images_01[0])
+image_result = image_resize.tam2(images_01[0],4)
 cv2.imwrite('output/quest_1.1.jpg',image_result)
 
 # Questão 1.2:

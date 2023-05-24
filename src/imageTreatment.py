@@ -52,21 +52,6 @@ class imageTreatment:
         plt.title(arg_b)
         plt.show()
 
-# # __________main__________
-# image = cv2.imread(r'../input/car.png',0)
-# equalized_image, histogram, cdf = equalize(image)
-# corrected_image = gamma(image, 0.4)
-
-# # printa imagem equalizada
-# # printIm('imagem equalizada', equalized_image) 
-# # print2Pl(image, equalized_image)
-
-# # # print histograma e cdf
-# # printPl(cdf)
-
-# # print gama
-# print2Im(image, corrected_image)
-
 
 
 
