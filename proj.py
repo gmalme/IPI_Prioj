@@ -30,16 +30,17 @@ images_02.append(cv2.imread(r'input/crowd.png'))
 images_02.append(cv2.imread(r'input/university.png'))
 
 # Questão 2.1:
-# corrected_image = image_treatment.gamma(images_02[0], 1.6)
-# image_treatment.print2Pl(images_02[0], corrected_image)
-# cv2.imwrite('output/quest_2.1.jpg',corrected_image)
+corrected_image = image_treatment.gamma(images_02[0], 1.6)
+cv2.imwrite('output/quest_2.1.jpg',corrected_image)
 
 # Questão 2.2:
 equalized_image, histogram, cdf = image_treatment.equalize(images_02[0])
-image_treatment.printPl(histogram)
-image_treatment.printPl(cdf)
-image_treatment.print2Pl(images_02[0], equalized_image)
 cv2.imwrite('output/quest_2.2.jpg',equalized_image)
 
+# _____________ Print 2.1 _____________
+# image_treatment.print2Pl(images_02[0], corrected_image)
 
- 
+# _____________ Print 2.2 _____________
+# image_treatment.printPl(histogram)
+# image_treatment.printPl(cdf)
+# image_treatment.print2Pl(images_02[0], equalized_image)

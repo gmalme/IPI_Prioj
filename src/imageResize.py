@@ -69,31 +69,6 @@ class imageResize:
     
         return matriz
 
-    def tam2(self, image, tam):
-        fill_image =  image
-        
-        for _ in range(tam//2):
-            fill_image = self.fill(fill_image)
-
-            for x in range(fill_image.shape[2]):
-                white_lines = self.verifica_row(fill_image[:,:,x])
-                fill_image[:,:,x] = self.odd_fill(fill_image[:,:,x], white_lines)
-                white_coll = self.verifica_coll(fill_image[:,:,x])
-                fill_image[:,:,x] = self.pair_fill(fill_image[:,:,x], white_coll)
-
-        return fill_image
-
-    def tamm(self, image):
-        fill_image = self.fill(image)
-
-        for x in range(fill_image.shape[2]):
-            white_lines = self.verifica_row(fill_image[:,:,x])
-            fill_image[:,:,x] = self.m_odd_fill(fill_image[:,:,x], white_lines)
-            white_coll = self.verifica_coll(fill_image[:,:,x])
-            fill_image[:,:,x] = self.m_pair_fill(fill_image[:,:,x], white_coll)
-
-        return fill_image
-
     def fill_matriz(self, matriz, image_b):
         for z in range(image_b.shape[2]):
             for x in range(image_b.shape[1]):
@@ -121,7 +96,32 @@ class imageResize:
                         matriz[x,y,z] = result/idx
 
         return matriz
+
+    def tam2(self, image, tam):
+        fill_image =  image
         
+        for _ in range(tam//2):
+            fill_image = self.fill(fill_image)
+
+            for x in range(fill_image.shape[2]):
+                white_lines = self.verifica_row(fill_image[:,:,x])
+                fill_image[:,:,x] = self.odd_fill(fill_image[:,:,x], white_lines)
+                white_coll = self.verifica_coll(fill_image[:,:,x])
+                fill_image[:,:,x] = self.pair_fill(fill_image[:,:,x], white_coll)
+
+        return fill_image
+
+    def tamm(self, image):
+        fill_image = self.fill(image)
+
+        for x in range(fill_image.shape[2]):
+            white_lines = self.verifica_row(fill_image[:,:,x])
+            fill_image[:,:,x] = self.m_odd_fill(fill_image[:,:,x], white_lines)
+            white_coll = self.verifica_coll(fill_image[:,:,x])
+            fill_image[:,:,x] = self.m_pair_fill(fill_image[:,:,x], white_coll)
+
+        return fill_image
+
     def merge_image(self, image_a, image_b):
         fill_image = self.fill(image_a)
         self.fill_matriz(fill_image, image_b)
